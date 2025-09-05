@@ -7,7 +7,7 @@ export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
   @Get()
-  async isEmpty(): Promise<number> {
-    return this.notesService.findLastId();
+  async isEmpty() {
+    return this.notesService.getNote(1);
   }
 }
