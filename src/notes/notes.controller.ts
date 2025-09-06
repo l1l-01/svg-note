@@ -7,7 +7,12 @@ export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
   @Get()
-  async isEmpty() {
-    return this.notesService.getNote(1);
+  async FindOne() {
+    return this.notesService.findOne(1);
+  }
+
+  @Get('/all')
+  async findAll() {
+    return this.notesService.findAll();
   }
 }
