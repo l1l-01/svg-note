@@ -44,7 +44,7 @@ export class NotesService {
     );
     console.log(`file id : ${id}`);
     if (!itemExists) {
-      throw new NotFoundException(fileName);
+      throw new NotFoundException(`Note not found`);
     }
     return { fileName: fileName };
   }
