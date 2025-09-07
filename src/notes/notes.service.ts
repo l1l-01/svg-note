@@ -78,11 +78,10 @@ export class NotesService {
   }
 
   async findAll(): Promise<Note[]> {
-    const empty = await this.isEmpty();
-    if (empty) {
-      throw new NotFoundException('Database is epmty');
-    }
     const files: string[] = await fs.readdir(this.dbPath);
+    if (files.length === 0) {
+      throw new NotFoundException('Database is empty');
+    }
     let notes: Note[] = [];
     for (const file of files) {
       const noteId: number = parseInt(file.replace('.svg', ''));
