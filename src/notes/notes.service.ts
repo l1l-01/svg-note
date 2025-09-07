@@ -15,8 +15,8 @@ export class NotesService {
   async readRawSVGNote(path: string) {
     const rawSvgNote = await fs.readFile(path, 'utf-8');
     const parser = new XMLParser();
-    const noteJson = parser.parse(rawSvgNote);
-    return noteJson;
+    const noteData = parser.parse(rawSvgNote);
+    return noteData;
   }
 
   async isEmpty(): Promise<boolean> {
@@ -32,13 +32,7 @@ export class NotesService {
     }
   }
 
-  async findLastId(): Promise<number> {
-    const files = await fs.readdir(this.dbPath);
-    const lastId = parseInt(files.slice(-1)[0].replace('.svg', ''));
-    return lastId;
-  }
-
-  async findOne(id: number): Promise<Note> {
+  async noteExists(id: number): Promise<{ fileName: string }> {
     const empty = await this.isEmpty();
     if (empty) {
       throw new NotFoundException('Database is empty');
@@ -48,10 +42,24 @@ export class NotesService {
     const itemExists: string | undefined = files.find(
       (file) => file === fileName,
     );
+    console.log(`file id : ${id}`);
     if (!itemExists) {
-      throw new NotFoundException('Note not found');
+      throw new NotFoundException(fileName);
     }
-    const allNoteData = await this.readRawSVGNote(`${this.dbPath}/${fileName}`);
+    return { fileName: fileName };
+  }
+
+  async findLastId(): Promise<number> {
+    const files = await fs.readdir(this.dbPath);
+    const lastId = parseInt(files.slice(-1)[0].replace('.svg', ''));
+    return lastId;
+  }
+
+  async findOne(id: number): Promise<Note> {
+    const fileData = await this.noteExists(id);
+    const allNoteData = await this.readRawSVGNote(
+      `${this.dbPath}/${fileData.fileName}`,
+    );
     const rawNote: NoteEntry = allNoteData.svg.text;
     if (!rawNote) {
       throw new NotFoundException('Note not found');

@@ -2,6 +2,7 @@ import { Controller } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import { Get, Param, ParseIntPipe } from '@nestjs/common';
 import { Note } from './interfaces/note.interface';
+import { NoteExistsPipe } from './pipes/note-exists.pipe';
 
 @Controller('notes')
 export class NotesController {
@@ -13,7 +14,9 @@ export class NotesController {
   }
 
   @Get(':id')
-  async findOne(@Param('id', ParseIntPipe) id: number): Promise<Note> {
+  async findOne(
+    @Param('id', ParseIntPipe, NoteExistsPipe) id: number,
+  ): Promise<Note> {
     return this.notesService.findOne(id);
   }
 }
