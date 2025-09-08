@@ -5,6 +5,7 @@ import { rawynoteContent } from './interfaces/raw.interface';
 import { promises as fs } from 'fs';
 import { XMLParser } from 'fast-xml-parser';
 import { join } from 'path';
+import { CreateNoteDto } from './dto/create-note.dto';
 
 type NoteEntry = [string, rawynoteContent, string];
 
@@ -19,25 +20,24 @@ export class NotesService {
     return noteData;
   }
 
-  async isEmpty(): Promise<boolean> {
+  async isEmpty(): Promise<{ empty: boolean; files: string[] }> {
     try {
-      const files = await fs.readdir(this.dbPath);
-      return files.length === 0;
+      const files: string[] = await fs.readdir(this.dbPath);
+      return { empty: files.length === 0, files: files };
     } catch (error) {
       if (error.code === 'ENOENT') {
         // In case the folder doesn't exist
-        return true;
+        return { empty: true, files: [] };
       }
       throw new NotFoundException('Database not found');
     }
   }
 
   async noteExists(id: number): Promise<{ fileName: string }> {
-    const empty = await this.isEmpty();
+    const { empty, files } = await this.isEmpty();
     if (empty) {
       throw new NotFoundException('Database is empty');
     }
-    const files: string[] = await fs.readdir(this.dbPath);
     const fileName = `${id}.svg`;
     const itemExists: string | undefined = files.find(
       (file) => file === fileName,
@@ -50,7 +50,10 @@ export class NotesService {
   }
 
   async findLastId(): Promise<number> {
-    const files = await fs.readdir(this.dbPath);
+    const { empty, files } = await this.isEmpty();
+    if (empty) {
+      throw new NotFoundException('Database is empty');
+    }
     const lastId = parseInt(files.slice(-1)[0].replace('.svg', ''));
     return lastId;
   }
@@ -78,7 +81,10 @@ export class NotesService {
   }
 
   async findAll(): Promise<Note[]> {
-    const files: string[] = await fs.readdir(this.dbPath);
+    const { empty, files } = await this.isEmpty();
+    if (empty) {
+      throw new NotFoundException('Database is empty');
+    }
     if (files.length === 0) {
       throw new NotFoundException('Database is empty');
     }
