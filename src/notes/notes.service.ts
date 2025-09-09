@@ -195,4 +195,11 @@ export class NotesService {
     const fileName = await this.noteExists(id);
     await fs.unlink(`${this.dbPath}/${fileName}`);
   }
+
+  async deleteAll(): Promise<void> {
+    const files = await this.isEmpty();
+    for (const file of files) {
+      await fs.unlink(`${this.dbPath}/${file}`);
+    }
+  }
 }
