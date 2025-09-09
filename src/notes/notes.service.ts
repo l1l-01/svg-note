@@ -190,4 +190,9 @@ export class NotesService {
     await this.createSVG(note);
     return note;
   }
+
+  async deleteOne(id: number): Promise<void> {
+    const fileName = await this.noteExists(id);
+    await fs.unlink(`${this.dbPath}/${fileName}`);
+  }
 }
