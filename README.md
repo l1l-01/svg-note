@@ -1,23 +1,45 @@
 # 📝 SVG-Note
 
-**SVG-Note** is an experimental note-taking web app where **SVG images** are used as the database.
-Each note is stored as an SVG element, making the database itself also a visual representation of your notes.
-This project explores the intersection of **data storage** and **visualization** in a playful way.
+**⚠️ NOTE: This project is still under active development. Features and functionality may change, and some parts are incomplete. Use with caution! ⚠️**
 
----
+**SVG-Note** is an experimental note-taking web app where **SVG images** serve as the database. Each note is stored as an SVG element, making the database a visual representation of your notes. This project explores the intersection of **data storage** and **visualization** in a playful, unconventional way.
 
 ## ✨ Features
-- Create, read, update, and delete notes stored inside an SVG file.
+- Create, read, update, and delete notes stored within an SVG file.
 - Notes are represented as SVG elements (text, shapes, or metadata).
-- Experimental approach: your database is also a graph-like, colorful visualization.
-- Built with **NestJS** for a clean and modular backend structure.
-
----
+- Experimental approach: the database doubles as a graph-like, colorful visualization.
+- Built with **NestJS** for a clean, modular backend structure.
 
 ## 🚀 Tech Stack
 - **Backend:** NestJS
 - **Database:** SVG (XML file with embedded notes)
+- **Frontend:** TBD (may use EJS templates or React for a richer UI)
 
-(Frontend TBD – could be plain EJS templates or React for a richer UI)
+## Prerequisites
+- [Node.js](https://nodejs.org/) (v16 or higher)
+- [NestJS CLI](https://docs.nestjs.com/cli/overview) (optional, for development)
 
----
+## Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/l1l-01/svg-note
+   cd SVG-Note
+   ```
+
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+
+3. Start the application:
+   ```bash
+   npm run start
+   ```
+
+## Usage
+- Navigate to `http://localhost:3000` (or the configured port) in your browser.
+- Create and manage notes, which are stored as SVG elements.
+- View the SVG file to see the visual representation of your notes.
+
+## Project Structure
+- `src/`: NestJS application code
