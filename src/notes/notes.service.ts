@@ -198,6 +198,9 @@ export class NotesService {
 
   async deleteAll(): Promise<void> {
     const files = await this.isEmpty();
+    if (files.length === 0) {
+      throw new NotFoundException('Notes not found');
+    }
     for (const file of files) {
       await fs.unlink(`${this.dbPath}/${file}`);
     }
