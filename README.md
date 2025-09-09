@@ -23,7 +23,7 @@
 1. Clone the repository:
    ```bash
    git clone https://github.com/l1l-01/svg-note
-   cd SVG-Note
+   cd svg-note
    ```
 
 2. Install dependencies:
@@ -33,7 +33,7 @@
 
 3. Start the application:
    ```bash
-   npm run start
+   npm run start:dev
    ```
 
 ## Usage
