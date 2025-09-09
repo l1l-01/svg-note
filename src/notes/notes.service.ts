@@ -110,10 +110,7 @@ export class NotesService {
 
   async isEmpty(): Promise<string[]> {
     try {
-      const files: string[] = await fs.readdir(this.dbPath);
-      if (files.length === 0) {
-        throw new NotFoundException('Database is empty');
-      }
+      const files: string[] = (await fs.readdir(this.dbPath)) || [];
       return files;
     } catch (err) {
       throw new NotFoundException('Database not found');
@@ -135,7 +132,10 @@ export class NotesService {
 
   async findLastId(): Promise<number> {
     const files = await this.isEmpty();
-    const lastId = parseInt(files.slice(-1)[0].replace('.svg', ''));
+    let lastId = 0;
+    if (files.length > 0) {
+      lastId = parseInt(files.slice(-1)[0].replace('.svg', ''));
+    }
     return lastId;
   }
 
