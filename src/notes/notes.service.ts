@@ -19,6 +19,14 @@ export class NotesService {
   private readonly dbPath = join(__dirname, '..', '..', 'src', 'db');
 
   async createSVG(note: Note): Promise<void> {
+    const words: string[] = note.content.split(' ');
+    const [line1, line2, line3, line4] = [
+      words.slice(0, 7),
+      words.slice(7, 13),
+      words.slice(13, 19),
+      words.slice(19, 25),
+    ].map((arr) => arr.join(' '));
+
     const svgContent: string = `
       <svg width="440" height="340" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -66,10 +74,10 @@ export class NotesService {
 
       <!-- Body content -->
       <text x="50" y="115" font-family="Share Tech Mono, monospace" font-size="14" fill="#c0faff">
-        <tspan x="50" dy="0">>${note.content}</tspan>
-        <tspan x="50" dy="22">Encryption: Active / Tier-3 Quantum.</tspan>
-        <tspan x="50" dy="22">Content: Advanced futuristic interface.</tspan>
-        <tspan x="50" dy="22">Status: Stable / No anomalies detected.</tspan>
+        <tspan x="50" dy="0">>${line1 ? line1 : ''}</tspan>
+        <tspan x="50" dy="22">${line2 ? line2 : ''}</tspan>
+        <tspan x="50" dy="22">${line3 ? line3 : ''}</tspan>
+        <tspan x="50" dy="22">${line4 ? line4 : ''}</tspan>
       </text>
 
       <!-- Futuristic bottom panel -->
