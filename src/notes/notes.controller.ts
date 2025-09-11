@@ -1,9 +1,18 @@
 import { Controller, HttpCode, HttpStatus } from '@nestjs/common';
 import { NotesService } from './notes.service';
-import { Get, Post, Delete, Body, Param, ParseIntPipe } from '@nestjs/common';
+import {
+  Get,
+  Post,
+  Put,
+  Delete,
+  Body,
+  Param,
+  ParseIntPipe,
+} from '@nestjs/common';
 import { Note } from './interfaces/note.interface';
 import { NoteExistsPipe } from './pipes/note-exists.pipe';
 import { CreateNoteDto } from './dto/create-note.dto';
+import { UpdateNoteDto } from './dto/update-note.dto';
 
 @Controller('notes')
 export class NotesController {
@@ -24,6 +33,14 @@ export class NotesController {
   @Post()
   async create(@Body() createNoteDto: CreateNoteDto): Promise<Note> {
     return await this.notesService.create(createNoteDto);
+  }
+
+  @Put(':id')
+  async update(
+    @Param('id', ParseIntPipe, NoteExistsPipe) id: number,
+    @Body() updateNoteDto: UpdateNoteDto,
+  ): Promise<Note> {
+    return await this.notesService.update(id, updateNoteDto);
   }
 
   @Delete('/all')

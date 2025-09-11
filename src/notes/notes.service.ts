@@ -11,6 +11,7 @@ import { XMLParser } from 'fast-xml-parser';
 import { join } from 'path';
 import * as path from 'path';
 import { CreateNoteDto } from './dto/create-note.dto';
+import { UpdateNoteDto } from './dto/update-note.dto';
 
 type NoteEntry = [string, rawynoteContent, string];
 
@@ -18,7 +19,7 @@ type NoteEntry = [string, rawynoteContent, string];
 export class NotesService {
   private readonly dbPath = join(__dirname, '..', '..', 'src', 'db');
 
-  async createSVG(note: Note): Promise<void> {
+  writeSvgContent(note: Note): string {
     const words: string[] = note.content.split(' ');
     const [line1, line2, line3, line4] = [
       words.slice(0, 7),
@@ -27,8 +28,7 @@ export class NotesService {
       words.slice(19, 25),
     ].map((arr) => arr.join(' '));
 
-    const svgContent: string = `
-      <svg width="440" height="340" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg">
+    const svgContent: string = `<svg width="440" height="340" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg">
       <defs>
         <!-- Background gradient -->
         <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -93,6 +93,11 @@ export class NotesService {
       <line x1="370" y1="250" x2="400" y2="240" stroke="#00eaff" stroke-width="2"/>
       <circle cx="400" cy="240" r="4" fill="#ff008c"/>
     </svg>`;
+    return svgContent;
+  }
+
+  async createSVG(note: Note): Promise<void> {
+    const svgContent: string = this.writeSvgContent(note);
     const filePath: string = path.join(this.dbPath, `${note.id}.svg`);
     try {
       await fs.writeFile(filePath, svgContent, 'utf-8');
@@ -123,7 +128,6 @@ export class NotesService {
     const itemExists: string | undefined = files.find(
       (file) => file === fileName,
     );
-    console.log(`file id : ${id}`);
     if (!itemExists) {
       throw new NotFoundException(`Note not found`);
     }
@@ -204,5 +208,27 @@ export class NotesService {
     for (const file of files) {
       await fs.unlink(`${this.dbPath}/${file}`);
     }
+  }
+
+  async update(id: number, updateNoteDto: UpdateNoteDto): Promise<Note> {
+    const fileName: string = await this.noteExists(id);
+    const date = new Date();
+    const formatteDate = date.toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric',
+      hour: 'numeric',
+      minute: 'numeric',
+    });
+    const updatedNote: Note = {
+      id: id,
+      title: updateNoteDto.title,
+      content: updateNoteDto.content,
+      createdAt: formatteDate,
+    };
+    const svgContent: string = this.writeSvgContent(updatedNote);
+    const filePath = path.join(this.dbPath, fileName);
+    await fs.writeFile(filePath, svgContent);
+    return updatedNote;
   }
 }
