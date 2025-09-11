@@ -1,4 +1,4 @@
-import { Controller, HttpCode, HttpStatus } from '@nestjs/common';
+import { Controller, HttpCode, HttpStatus, Query } from '@nestjs/common';
 import { NotesService } from './notes.service';
 import {
   Get,
@@ -17,6 +17,11 @@ import { UpdateNoteDto } from './dto/update-note.dto';
 @Controller('notes')
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
+
+  @Get('/search')
+  async search(@Query('keyword') keyword: string): Promise<Note[]> {
+    return await this.notesService.searchByKeyword(keyword);
+  }
 
   @Get('/all')
   async findAll(): Promise<Note[]> {

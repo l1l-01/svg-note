@@ -231,4 +231,18 @@ export class NotesService {
     await fs.writeFile(filePath, svgContent);
     return updatedNote;
   }
+
+  async searchByKeyword(keyword: string): Promise<Note[]> {
+    const files = await this.isEmpty();
+    let notes: Note[] = [];
+    for (const file of files) {
+      console.log(file);
+      const id: number = parseInt(file.replace('.svg', ''));
+      const note: Note = await this.findOne(id);
+      if (note.title.includes(keyword) || note.content.includes(keyword)) {
+        notes.push(note);
+      }
+    }
+    return notes;
+  }
 }
