@@ -1,0 +1,24 @@
+<%- include('../components/header', { title: title }) %>
+
+<h1><%= title %></h1>
+
+<% if (!notes || notes.length === 0) { %>
+  <p>No notes yet — <a href="/notes/new">create one</a>.</p>
+<% } else { %>
+  <ul>
+    <% notes.forEach(note => { %>
+      <li>
+        <strong><%= note.title %></strong>
+        <p><%= note.content || '' %></p>
+        <a href="">edit</a>
+
+        <form method="POST" action="" >
+          <input type="hidden" name="_method" value="DELETE">
+          <button type="submit">Delete</button>
+        </form>
+      </li>
+    <% }) %>
+  </ul>
+<% } %>
+
+<%- include('../components/footer') %>

@@ -8,6 +8,7 @@ import {
   Body,
   Param,
   ParseIntPipe,
+  Render,
 } from '@nestjs/common';
 import { Note } from './interfaces/note.interface';
 import { NoteExistsPipe } from './pipes/note-exists.pipe';
@@ -26,6 +27,13 @@ export class NotesController {
   @Get('/all')
   async findAll(): Promise<Note[]> {
     return this.notesService.findAll();
+  }
+
+  @Get()
+  @Render('notes/index')
+  async index(): Promise<{ notes: Note[]; title: string }> {
+    const notes: Note[] = await this.notesService.findAll();
+    return { notes, title: 'My note' };
   }
 
   @Get(':id')

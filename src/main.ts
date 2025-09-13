@@ -18,8 +18,9 @@ async function bootstrap() {
   // static assets (css/js/images)
   app.useStaticAssets(join(__dirname, '..', 'public'));
 
-  // EJS views
+  // Seeting EJS views and ejs template engine
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
+  app.setViewEngine('ejs');
 
   await app.listen(process.env.PORT ?? 3000);
 }
