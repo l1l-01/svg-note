@@ -13,11 +13,12 @@
 ## 🚀 Tech Stack
 - **Backend:** NestJS
 - **Database:** SVG (XML file with embedded notes)
-- **Frontend:** TBD (may use EJS templates or React for a richer UI)
+- **Frontend:** EJS template engine
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/) (v16 or higher)
 - [NestJS CLI](https://docs.nestjs.com/cli/overview) (optional, for development)
+- [EJS](https://ejs.co/) (for templating)
 
 ## Installation
 1. Clone the repository:
