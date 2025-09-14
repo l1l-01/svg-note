@@ -19,7 +19,7 @@
 - [Node.js](https://nodejs.org/) (v16 or higher)
 - [NestJS CLI](https://docs.nestjs.com/cli/overview) (optional, for development)
 - [EJS](https://ejs.co/) (for templating)
-- [Bluma](https://bulma.io/)
+- [Bluma](https://bulma.io/) (for styling)
 
 ## Installation
 1. Clone the repository:
