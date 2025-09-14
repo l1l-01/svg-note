@@ -13,12 +13,13 @@
 ## 🚀 Tech Stack
 - **Backend:** NestJS
 - **Database:** SVG (XML file with embedded notes)
-- **Frontend:** EJS template engine
+- **Frontend:** EJS template engine, Bluma CSS framework
 
 ## Prerequisites
 - [Node.js](https://nodejs.org/) (v16 or higher)
 - [NestJS CLI](https://docs.nestjs.com/cli/overview) (optional, for development)
 - [EJS](https://ejs.co/) (for templating)
+- [Bluma](https://bulma.io/)
 
 ## Installation
 1. Clone the repository:
