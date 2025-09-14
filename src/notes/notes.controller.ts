@@ -33,7 +33,7 @@ export class NotesController {
   @Render('notes/index')
   async index(): Promise<{ notes: Note[]; title: string }> {
     const notes: Note[] = await this.notesService.findAll();
-    return { notes, title: 'My note' };
+    return { notes, title: 'My notes' };
   }
 
   @Get(':id')

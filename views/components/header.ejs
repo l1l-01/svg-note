@@ -4,10 +4,30 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <title><%= title || 'App' %></title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bulma@1.0.4/css/bulma.min.css"
+  >
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" rel="stylesheet">
 </head>
-<body>
-  <nav>
-    <a href="/notes">Notes</a> |
-    <a href="/notes/new">New note</a>
-  </nav>
-  <main>
+<body class="is-flex is-flex-direction-column is-justify-content-center">
+    <div class="tabs is-boxed pl-5 pr-5 pt-2 pb-2">
+      <ul>
+        <li class="is-active">
+          <a>
+            <span class="icon is-small"
+              ><i class="fas fa-image" aria-hidden="true"></i
+            ></span>
+            <span>Html UI</span>
+          </a>
+        </li>
+        <li>
+          <a>
+            <span class="icon is-small"
+              ><i class="fas fa-image" aria-hidden="true"></i
+            ></span>
+            <span>Svg UI</span>
+          </a>
+        </li>
+      </ul>
+    </div>
