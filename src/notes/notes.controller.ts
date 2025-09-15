@@ -9,11 +9,13 @@ import {
   Param,
   ParseIntPipe,
   Render,
+  Res,
 } from '@nestjs/common';
 import { Note } from './interfaces/note.interface';
 import { NoteExistsPipe } from './pipes/note-exists.pipe';
 import { CreateNoteDto } from './dto/create-note.dto';
 import { UpdateNoteDto } from './dto/update-note.dto';
+import { Response } from 'express';
 
 @Controller('notes')
 export class NotesController {
@@ -34,6 +36,15 @@ export class NotesController {
   async index(): Promise<{ notes: Note[]; title: string }> {
     const notes: Note[] = await this.notesService.findAll();
     return { notes, title: 'My notes' };
+  }
+
+  @Get('/edit/:id')
+  @Render('notes/edit')
+  async edit(
+    @Param('id', ParseIntPipe, NoteExistsPipe) id: number,
+  ): Promise<{ note: Note; title: string }> {
+    const note = await this.notesService.findOne(id);
+    return { note, title: 'Edit note' };
   }
 
   @Get(':id')
@@ -68,5 +79,15 @@ export class NotesController {
     @Param('id', ParseIntPipe, NoteExistsPipe) id: number,
   ): Promise<void> {
     return this.notesService.deleteOne(id);
+  }
+
+  @Delete('/delete/:id')
+  @HttpCode(HttpStatus.NO_CONTENT)
+  async deleteOne(
+    @Param('id', ParseIntPipe, NoteExistsPipe) id: number,
+    @Res() res: Response,
+  ): Promise<void> {
+    await this.notesService.deleteOne(id);
+    return res.redirect('/notes');
   }
 }

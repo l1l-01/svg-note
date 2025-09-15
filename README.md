@@ -39,9 +39,10 @@
    ```
 
 ## Usage
-- Navigate to `http://localhost:3000` (or the configured port) in your browser.
+- Navigate to `http://localhost:3000/notes` (or the configured port) in your browser.
 - Create and manage notes, which are stored as SVG elements.
 - View the SVG file to see the visual representation of your notes.
 
 ## Project Structure
 - `src/`: NestJS application code
+- `views/`: EJS templates

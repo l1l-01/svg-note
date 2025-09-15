@@ -23,9 +23,10 @@
             </div>
           </div>
           <footer class="card-footer">
-            <a href="#" class="card-footer-item">Save</a>
-            <a href="#" class="card-footer-item">Edit</a>
-            <a href="#" class="card-footer-item">Delete</a>
+            <a href="/notes/edit/<%= note.id %>" class="card-footer-item has-text-info">Edit</a>
+            <form class="card-footer-item" method="post" action="/notes/delete/<%= note.id %>?_method=DELETE">
+                <button type="submit" class="has-text-danger">Delete</button>
+            </form>
           </footer>
         </div>
       </div>
