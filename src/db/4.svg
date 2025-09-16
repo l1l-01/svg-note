@@ -37,7 +37,7 @@
 
       <!-- Title -->
       <text x="50" y="70" font-family="Orbitron, monospace" font-size="20" font-weight="bold"
-            fill="#00eaff" filter="url(#neonGlow)">Note 2</text>
+            fill="#00eaff" filter="url(#neonGlow)">Note 4</text>
 
       <!-- Divider with glowing pulse -->
       <line x1="50" y1="80" x2="370" y2="80" stroke="#ff008c" stroke-width="1.5" opacity="0.9"/>
@@ -45,7 +45,7 @@
       <!-- Body content -->
       <text x="50" y="115" font-family="Share Tech Mono, monospace" font-size="14" fill="#c0faff">
         <tspan x="50" dy="0">>This is simply a note content, It's</tspan>
-        <tspan x="50" dy="22">the second note.</tspan>
+        <tspan x="50" dy="22">the fourth note.</tspan>
         <tspan x="50" dy="22"></tspan>
         <tspan x="50" dy="22"></tspan>
       </text>
@@ -57,7 +57,7 @@
 
       <!-- Footer info -->
       <text x="60" y="275" font-family="Share Tech Mono, monospace" font-size="12"
-            fill="#00ff99">Created: Sep 11, 2025, 7:46 PM</text>
+            fill="#00ff99">Created: Sep 16, 2025, 3:19 PM</text>
 
       <!-- Small circuit-like details -->
       <line x1="370" y1="250" x2="400" y2="240" stroke="#00eaff" stroke-width="2"/>

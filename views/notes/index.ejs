@@ -1,4 +1,34 @@
 <%- include('../components/header', { title: title }) %>
+    <form id="modal" class="modal"  method="POST" action="/notes">
+        <div class="modal-background" onclick="closeModal()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add new note</p>
+                <button class="delete" aria-label="close" onclick="closeModal()"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                  <p class="control has-icons-left">
+                    <input class="input is-medium" type="text" placeholder="Note title" name="title">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-note-sticky"></i>
+                    </span>
+                  </p>
+                </div>
+                <div class="control">
+                  <textarea
+                    class="textarea is-hovered is-medium"
+                    placeholder="Note content"
+                    name="content"
+                  ></textarea>
+                </div>
+            </section>
+            <footer class="modal-card-foot is-flex">
+                <button type="submit" class="button is-success mr-2" onclick="closeModal()">Add</button>
+                <button class="button" onclick="closeModal()">Cancel</button>
+            </footer>
+        </div>
+        </form>
 
 <div class="columns is-multiline is-variable is-5 pl-5 pr-5 pt-2 pb-2">
   <% if (!notes || notes.length === 0) { %>

@@ -55,8 +55,9 @@ export class NotesController {
   }
 
   @Post()
-  async create(@Body() createNoteDto: CreateNoteDto): Promise<Note> {
-    return await this.notesService.create(createNoteDto);
+  async create(@Body() createNoteDto: CreateNoteDto, @Res() res: Response) {
+    await this.notesService.create(createNoteDto);
+    res.redirect('/notes');
   }
 
   @Put(':id')
