@@ -4,6 +4,7 @@ import { NestExpressApplication } from '@nestjs/platform-express';
 import * as express from 'express';
 import * as methodOverride from 'method-override';
 import { join } from 'path';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create<NestExpressApplication>(AppModule);
@@ -11,6 +12,20 @@ async function bootstrap() {
   // parse HTML form bodies
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
+
+  // Enable ValidationPipe globally
+  app.useGlobalPipes(
+    new ValidationPipe({
+      // Strip properties not in DTO
+      whitelist: true,
+      // Reject non-DTO properties
+      forbidNonWhitelisted: true,
+      // Transform payloads to DTO instances
+      transform: true,
+      // Handle query params and form data
+      transformOptions: { enableImplicitConversion: true },
+    }),
+  );
 
   // allow HTML forms to use PUT/DELETE via _method
   app.use(methodOverride('_method'));
