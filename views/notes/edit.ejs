@@ -1,1 +1,25 @@
 <%- include('../components/header', { title: title }) %>
+<%- include('../components/cardModel', { title: title }) %>
+<form  method="POST" action="/notes/<%= note.id %>?_method=PUT" class="pl-5 pr-5">
+    <div class="modal-card">
+        <section>
+            <div class="field">
+              <p class="control has-icons-left">
+                <input class="input is-medium" type="text" placeholder="Note title" name="title" value="<%= note.title || '' %>">
+                <span class="icon is-small is-left">
+                  <i class="fas fa-note-sticky"></i>
+                </span>
+              </p>
+            </div>
+            <div class="control">
+              <textarea
+                class="textarea is-hovered is-medium"
+                placeholder="Note content"
+                name="content"
+              ><%= note.content.replace(/>/g, '') || "" %></textarea>
+            </div>
+        </section>
+        <button type="submit" class="button is-info coulmn is-medium mt-5">Update</button>
+    </div>
+    </form>
+<%- include('../components/footer') %>

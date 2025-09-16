@@ -1,0 +1,30 @@
+    <form id="modal" class="modal"  method="POST" action="/notes">
+        <div class="modal-background" onclick="toggleModal()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title">Add new note</p>
+                <button class="delete" aria-label="close" onclick="toggleModal()"></button>
+            </header>
+            <section class="modal-card-body">
+                <div class="field">
+                  <p class="control has-icons-left">
+                    <input class="input is-medium" type="text" placeholder="Note title" name="title">
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-note-sticky"></i>
+                    </span>
+                  </p>
+                </div>
+                <div class="control">
+                  <textarea
+                    class="textarea is-hovered is-medium"
+                    placeholder="Note content"
+                    name="content"
+                  ></textarea>
+                </div>
+            </section>
+            <footer class="modal-card-foot is-flex">
+                <button type="submit" class="button is-success mr-2">Add</button>
+                <span class="button" onclick="toggleModal()">Cancel</span>
+            </footer>
+        </div>
+        </form>

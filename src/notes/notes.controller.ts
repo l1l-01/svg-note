@@ -26,10 +26,10 @@ export class NotesController {
     return await this.notesService.searchByKeyword(keyword);
   }
 
-  @Get('/all')
+  /*@Get('/all')
   async findAll(): Promise<Note[]> {
     return this.notesService.findAll();
-  }
+  }*/
 
   @Get()
   @Render('notes/index')
@@ -48,10 +48,12 @@ export class NotesController {
   }
 
   @Get(':id')
-  async findOne(
+  @Render('notes/edit')
+  async show(
     @Param('id', ParseIntPipe, NoteExistsPipe) id: number,
-  ): Promise<Note> {
-    return this.notesService.findOne(id);
+  ): Promise<{ note: Note; title: string }> {
+    const note: Note = await this.notesService.findOne(id);
+    return { note, title: 'Edit note' };
   }
 
   @Post()
@@ -64,8 +66,10 @@ export class NotesController {
   async update(
     @Param('id', ParseIntPipe, NoteExistsPipe) id: number,
     @Body() updateNoteDto: UpdateNoteDto,
-  ): Promise<Note> {
-    return await this.notesService.update(id, updateNoteDto);
+    @Res() res: Response,
+  ) {
+    await this.notesService.update(id, updateNoteDto);
+    res.redirect('/notes');
   }
 
   @Delete('/all')
