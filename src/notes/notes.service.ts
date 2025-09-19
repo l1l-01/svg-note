@@ -236,10 +236,10 @@ export class NotesService {
     const files = await this.isEmpty();
     let notes: Note[] = [];
     for (const file of files) {
-      console.log(file);
       const id: number = parseInt(file.replace('.svg', ''));
       const note: Note = await this.findOne(id);
-      if (note.title.includes(keyword) || note.content.includes(keyword)) {
+      const regex = new RegExp(keyword, 'i');
+      if (regex.test(note.title) || regex.test(note.content)) {
         notes.push(note);
       }
     }

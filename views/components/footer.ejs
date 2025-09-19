@@ -1,7 +1,22 @@
   <script>
-  function toggleModal() {
-    document.getElementById('modal').classList.toggle('is-active');
-  }
+  const modals = document.querySelectorAll('.modal');
+  const openModel = document.querySelectorAll('.open-model');
+  const closeModal = document.querySelectorAll('.close-modal-1');
+  const closeModal2 = document.querySelectorAll('.close-modal-2');
+
+  openModel.forEach((trigger,i) => {
+    trigger.addEventListener('click', () => modals[i].classList.add('is-active'));
+    console.log("was clicked")
+  });
+
+  closeModal.forEach((trigger) => {
+    trigger.addEventListener('click', () => modals[0].classList.remove('is-active'));
+  });
+
+  closeModal2.forEach((trigger) => {
+    trigger.addEventListener('click', () => modals[1].classList.remove('is-active'));
+  });
+
   </script>
 </body>
 </html>

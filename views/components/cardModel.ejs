@@ -1,9 +1,9 @@
-    <form id="modal" class="modal"  method="POST" action="/notes">
-        <div class="modal-background" onclick="toggleModal()"></div>
+    <form class="modal"  method="POST" action="/notes">
+        <div class="modal-background close-modal-1"></div>
         <div class="modal-card">
             <header class="modal-card-head">
                 <p class="modal-card-title">Add new note</p>
-                <button class="delete" aria-label="close" onclick="toggleModal()"></button>
+                <span class="delete close-modal-1" aria-label="close"></span>
             </header>
             <section class="modal-card-body">
                 <div class="field">
@@ -24,7 +24,30 @@
             </section>
             <footer class="modal-card-foot is-flex">
                 <button type="submit" class="button is-success mr-2">Add</button>
-                <span class="button" onclick="toggleModal()">Cancel</span>
+                <span class="button close-modal-1">Cancel</span>
             </footer>
         </div>
         </form>
+        <form class="modal"  method="GET" action="/notes/search">
+            <div class="modal-background close-modal-2"></div>
+            <div class="modal-card">
+                <header class="modal-card-head">
+                    <p class="modal-card-title">Search for note</p>
+                    <span class="delete  close-modal-2" aria-label="close"></span>
+                </header>
+                <section class="modal-card-body">
+                    <div class="field">
+                      <p class="control has-icons-left">
+                        <input class="input is-medium" type="text" placeholder="Note title" name="keyword">
+                        <span class="icon is-small is-left">
+                          <i class="fas fa-note-sticky"></i>
+                        </span>
+                      </p>
+                    </div>
+                </section>
+                <footer class="modal-card-foot is-flex">
+                    <button type="submit" class="button is-success mr-2">Search</button>
+                    <span class="button  close-modal-2">Cancel</span>
+                </footer>
+            </div>
+            </form>

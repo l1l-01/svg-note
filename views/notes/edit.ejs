@@ -1,5 +1,6 @@
 <%- include('../components/header', { title: title }) %>
 <%- include('../components/cardModel', { title: title }) %>
+
 <form  method="POST" action="/notes/<%= note.id %>?_method=PUT" class="pl-5 pr-5">
     <div class="modal-card">
         <section>
@@ -22,4 +23,5 @@
         <button type="submit" class="button is-info coulmn is-medium mt-5">Update</button>
     </div>
     </form>
+
 <%- include('../components/footer') %>

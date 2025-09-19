@@ -22,8 +22,12 @@ export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
   @Get('/search')
-  async search(@Query('keyword') keyword: string): Promise<Note[]> {
-    return await this.notesService.searchByKeyword(keyword);
+  @Render('notes/search')
+  async search(
+    @Query('keyword') keyword: string,
+  ): Promise<{ notes: Note[]; title: string }> {
+    const notes: Note[] = await this.notesService.searchByKeyword(keyword);
+    return { notes, title: 'Search results' };
   }
 
   /*@Get('/all')

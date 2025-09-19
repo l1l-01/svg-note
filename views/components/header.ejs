@@ -14,7 +14,7 @@
     <div class="tabs is-boxed pl-5 pr-5 pt-2 pb-2">
       <ul>
         <li class="is-active">
-          <a>
+          <a href="/notes">
             <span class="icon is-small"
               ><i class="fas fa-code" aria-hidden="true"></i
             ></span>
@@ -29,13 +29,22 @@
             <span>Svg UI</span>
           </a>
         </li>
-        <li>
+        <li class="open-model">
           <a>
             <span class="icon is-small"
               ><i class="fas fa-cog" aria-hidden="true"></i
             ></span>
-            <span onclick="toggleModal()">Add Note</span>
+            <span>Add Note</span>
+          </a>
+        </li>
+        <li class="open-model">
+          <a>
+            <span class="icon is-small"
+              ><i class="fas fa-search" aria-hidden="true"></i
+            ></span>
+            <span>Search</span>
           </a>
         </li>
       </ul>
     </div>
+    <h1 class="subtitle is-4 pl-5 pr-5"><%= title %>:</h1>
