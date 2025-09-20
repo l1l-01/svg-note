@@ -8,7 +8,6 @@
 ## ✨ Features
 - Create, read, update, and delete notes stored within an SVG file.
 - Notes are represented as SVG elements (text, shapes, or metadata).
-- Experimental approach: the database doubles as a graph-like, colorful visualization.
 - Built with **NestJS** for a clean, modular backend structure.
 
 ## 🚀 Tech Stack
