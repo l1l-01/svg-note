@@ -1,6 +1,6 @@
 # 📝 SVG-Note
 
-![Project Screenshot](./htlmui.png)
+![Project Screenshot](./htmlui.png)
 ![Project Screenshot](./svgui.png)
 
 **SVG-Note** is an experimental note-taking web app where **SVG images** serve as the database. Each note is stored as an SVG element, making the database a visual representation of your notes. This project explores the intersection of **data storage** and **visualization** in a playful, unconventional way.
