@@ -47,3 +47,7 @@
 ## Project Structure
 - `src/`: NestJS application code
 - `views/`: EJS templates
+
+## Some Routes
+- `Html UI`: http://localhost:3000/notes
+- `Svg UI`: http://localhost:3000/notes/svg
