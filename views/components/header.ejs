@@ -13,7 +13,7 @@
 <body class="is-flex is-flex-direction-column is-justify-content-center">
     <div class="tabs is-boxed pl-5 pr-5 pt-2 pb-2">
       <ul>
-        <li class="is-active">
+        <li class="<%= title === 'My notes' ? 'is-active' : '' %>">
           <a href="/notes">
             <span class="icon is-small"
               ><i class="fas fa-code" aria-hidden="true"></i
@@ -21,7 +21,7 @@
             <span>Html UI</span>
           </a>
         </li>
-        <li>
+        <li class="<%= title === 'My svg notes' ? 'is-active' : '' %>">
           <a href="/notes/svg">
             <span class="icon is-small"
               ><i class="fas fa-image" aria-hidden="true"></i
@@ -37,7 +37,7 @@
             <span>Add Note</span>
           </a>
         </li>
-        <li class="open-model">
+        <li class="open-model <%= title === 'Search results' ? 'is-active' : '' %>">
           <a>
             <span class="icon is-small"
               ><i class="fas fa-search" aria-hidden="true"></i

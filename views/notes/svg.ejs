@@ -5,7 +5,7 @@
     <p>No notes yet.</p>
   <% } else { %>
     <% notes.forEach(note => { %>
-      <img src="/<%= note.id %>.svg" alt="<%= note.title %>" style="width: 350px; height: auto;">
+      <img src="/db/<%= note.id %>.svg" alt="<%= note.title %>" style="width: 380px; height: auto;">
     <% }) %>
   <% } %>
 </div>

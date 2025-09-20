@@ -31,7 +31,7 @@ async function bootstrap() {
   app.use(methodOverride('_method'));
 
   // static assets (svg images)
-  app.useStaticAssets(join(__dirname, 'db'));
+  app.useStaticAssets(join(__dirname, '..', 'src', 'db'), { prefix: '/db' });
 
   // Seeting EJS views and ejs template engine
   app.setBaseViewsDir(join(__dirname, '..', 'views'));
