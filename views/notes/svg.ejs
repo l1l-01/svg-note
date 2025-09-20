@@ -1,0 +1,13 @@
+<%- include('../components/header', { title: title }) %>
+<%- include('../components/cardModel', { title: title }) %>
+<div style="display: flex; flex-wrap: wrap; padding: 1rem;">
+  <% if (!notes || notes.length === 0) { %>
+    <p>No notes yet.</p>
+  <% } else { %>
+    <% notes.forEach(note => { %>
+      <img src="/<%= note.id %>.svg" alt="<%= note.title %>" style="width: 350px; height: auto;">
+    <% }) %>
+  <% } %>
+</div>
+
+<%- include('../components/footer') %>

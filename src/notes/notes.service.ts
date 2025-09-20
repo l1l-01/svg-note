@@ -30,69 +30,67 @@ export class NotesService {
 
     const svgContent: string = `<svg width="440" height="340" viewBox="0 0 440 340" xmlns="http://www.w3.org/2000/svg">
       <defs>
-        <!-- Background gradient -->
+        <!-- Terminal-like gradient background -->
         <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
-          <stop offset="0%" stop-color="#0a0a12"/>
-          <stop offset="100%" stop-color="#1a0f2e"/>
+          <stop offset="0%" stop-color="#0d1117"/>
+          <stop offset="100%" stop-color="#1c2526"/>
         </linearGradient>
 
-        <!-- Neon glow filter -->
-        <filter id="neonGlow" x="-50%" y="-50%" width="200%" height="200%">
-          <feDropShadow dx="0" dy="0" stdDeviation="3" flood-color="#ff008c"/>
-          <feDropShadow dx="0" dy="0" stdDeviation="6" flood-color="#00eaff"/>
+        <!-- Hacker glow effect -->
+        <filter id="terminalGlow" x="-50%" y="-50%" width="200%" height="200%">
+          <feGaussianBlur in="SourceGraphic" stdDeviation="3" result="blur"/>
+          <feMerge>
+            <feMergeNode in="blur"/>
+            <feMergeNode in="SourceGraphic"/>
+          </feMerge>
         </filter>
 
-        <!-- Grid overlay -->
-        <pattern id="techGrid" width="14" height="14" patternUnits="userSpaceOnUse">
-          <path d="M14 0 L0 0 0 14" fill="none" stroke="rgba(0,234,255,0.05)" stroke-width="0.5"/>
+        <!-- Subtle scanline pattern -->
+        <pattern id="scanlines" width="4" height="4" patternUnits="userSpaceOnUse">
+          <path d="M0 4 H4" fill="none" stroke="rgba(0,255,128,0.05)" stroke-width="0.2"/>
         </pattern>
       </defs>
 
-      <!-- Layered panel background -->
-      <polygon points="30,30 410,20 400,300 20,310"
-               fill="url(#bgGradient)" stroke="#00eaff" stroke-width="1.5"
-               filter="url(#neonGlow)"/>
-      <polygon points="35,35 405,25 395,295 25,305"
-               fill="url(#techGrid)" opacity="0.3"/>
+      <!-- Terminal window background -->
+      <rect x="20" y="20" width="400" height="300" rx="8" ry="8"
+            fill="url(#bgGradient)" stroke="#00ff80" stroke-width="1"
+            filter="url(#terminalGlow)"/>
+      <rect x="22" y="22" width="396" height="296" fill="url(#scanlines)" opacity="0.4"/>
 
-      <!-- Futuristic side bars -->
-      <rect x="30" y="60" width="6" height="220" fill="#ff008c" opacity="0.6"/>
-      <rect x="404" y="60" width="6" height="220" fill="#00eaff" opacity="0.6"/>
+      <!-- Window controls (terminal dots) -->
+      <circle cx="35" cy="35" r="4" fill="#ff5555"/>
+      <circle cx="50" cy="35" r="4" fill="#ffaa00"/>
+      <circle cx="65" cy="35" r="4" fill="#00ff80"/>
 
-      <!-- Corner markers -->
-      <circle cx="30" cy="30" r="4" fill="#00ff99"/>
-      <circle cx="410" cy="20" r="4" fill="#ff008c"/>
-      <circle cx="400" cy="300" r="4" fill="#00eaff"/>
-      <circle cx="20" cy="310" r="4" fill="#ff66cc"/>
+      <!-- Title with terminal prompt style -->
+      <text x="40" y="70" font-family="'Fira Code', 'Consolas', monospace" font-size="20" font-weight="500"
+            fill="#00ff80" filter="url(#terminalGlow)">${note.title}</text>
 
-      <!-- Title -->
-      <text x="50" y="70" font-family="Orbitron, monospace" font-size="20" font-weight="bold"
-            fill="#00eaff" filter="url(#neonGlow)">${note.title}</text>
+      <!-- Divider (command line style) -->
+      <line x1="40" y1="80" x2="400" y2="80" stroke="#00ff80" stroke-width="1" opacity="0.8"/>
 
-      <!-- Divider with glowing pulse -->
-      <line x1="50" y1="80" x2="370" y2="80" stroke="#ff008c" stroke-width="1.5" opacity="0.9"/>
-
-      <!-- Body content -->
-      <text x="50" y="115" font-family="Share Tech Mono, monospace" font-size="14" fill="#c0faff">
-        <tspan x="50" dy="0">>${line1 ? line1 : ''}</tspan>
-        <tspan x="50" dy="22">${line2 ? line2 : ''}</tspan>
-        <tspan x="50" dy="22">${line3 ? line3 : ''}</tspan>
-        <tspan x="50" dy="22">${line4 ? line4 : ''}</tspan>
+      <!-- Body text with code-like formatting -->
+      <text x="40" y="110" font-family="'Inter', sans-serif" font-size="16" fill="#e6e6e6">
+        <tspan x="40" dy="0">${line1 ? line1 : ''}</tspan>
+        <tspan x="40" dy="20">${line2 ? line2 : ''}</tspan>
+        <tspan x="40" dy="20">${line3 ? line3 : ''}</tspan>
+        <tspan x="40" dy="20">${line4 ? line4 : ''}</tspan>
       </text>
 
-      <!-- Futuristic bottom panel -->
-      <rect x="50" y="250" width="320" height="40" rx="4" ry="4"
-            fill="rgba(0,234,255,0.08)" stroke="#ff008c" stroke-width="1"
-            filter="url(#neonGlow)"/>
+      <!-- Footer panel (status bar) -->
+      <rect x="40" y="260" width="360" height="40" rx="4" ry="4"
+            fill="rgba(0,255,128,0.1)" stroke="#00ff80" stroke-width="0.8"
+            filter="url(#terminalGlow)"/>
 
-      <!-- Footer info -->
-      <text x="60" y="275" font-family="Share Tech Mono, monospace" font-size="12"
-            fill="#00ff99">Created: ${note.createdAt}</text>
+      <!-- Footer text (timestamp) -->
+      <text x="50" y="285" font-family="'Fira Code', 'Consolas', monospace" font-size="12"
+            fill="#00ff80">Create At: ${note.createdAt}</text>
 
-      <!-- Small circuit-like details -->
-      <line x1="370" y1="250" x2="400" y2="240" stroke="#00eaff" stroke-width="2"/>
-      <circle cx="400" cy="240" r="4" fill="#ff008c"/>
-    </svg>`;
+      <!-- Hacker accents -->
+      <line x1="380" y1="260" x2="400" y2="260" stroke="#00ff80" stroke-width="1.5"/>
+      <rect x="390" y="255" width="8" height="8" fill="#00ff80"/>
+    </svg>
+`;
     return svgContent;
   }
 

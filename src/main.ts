@@ -30,8 +30,8 @@ async function bootstrap() {
   // allow HTML forms to use PUT/DELETE via _method
   app.use(methodOverride('_method'));
 
-  // static assets (css/js/images)
-  app.useStaticAssets(join(__dirname, '..', 'public'));
+  // static assets (svg images)
+  app.useStaticAssets(join(__dirname, 'db'));
 
   // Seeting EJS views and ejs template engine
   app.setBaseViewsDir(join(__dirname, '..', 'views'));

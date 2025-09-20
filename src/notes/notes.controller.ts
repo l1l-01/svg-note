@@ -21,6 +21,13 @@ import { Response } from 'express';
 export class NotesController {
   constructor(private readonly notesService: NotesService) {}
 
+  @Get('/svg')
+  @Render('notes/svg')
+  async svg(): Promise<{ notes: Note[]; title: string }> {
+    const notes: Note[] = await this.notesService.findAll();
+    return { notes, title: 'My svg notes' };
+  }
+
   @Get('/search')
   @Render('notes/search')
   async search(
